@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111111" />
+  <title>Invitación de cumpleaños</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="intro" class="intro-screen">
+    <div class="phone-card">
+      <p class="eyebrow">MENSAJE RECIBIDO</p>
+      <div class="divider"></div>
+      <p><strong>DE:</strong> ORGANIZADOR</p>
+      <p><strong>PARA:</strong> TI</p>
+      <button id="openInvitation" class="retro-button" type="button">OK</button>
+      <p class="hint">Toca para abrir la invitación</p>
+    </div>
+  </div>
+
+  <main id="invitation" class="invitation is-hidden">
+    <section class="hero section full-screen">
+      <div class="grain"></div>
+      <div class="hero-content reveal">
+        <p class="eyebrow">GUARDA LA FECHA</p>
+        <h1>Una noche para recordar</h1>
+        <p class="lead">La invitación está en camino. Por ahora, este es el comienzo de algo especial.</p>
+        <a class="scroll-cue" href="#countdown" aria-label="Bajar a la siguiente sección">↓</a>
+      </div>
+    </section>
+
+    <section id="countdown" class="section light-section">
+      <div class="section-inner reveal">
+        <p class="eyebrow dark">FALTA POCO</p>
+        <h2>Cuenta regresiva</h2>
+        <div class="countdown" aria-live="polite">
+          <div><span id="days">00</span><small>Días</small></div>
+          <div><span id="hours">00</span><small>Horas</small></div>
+          <div><span id="minutes">00</span><small>Min</small></div>
+          <div><span id="seconds">00</span><small>Seg</small></div>
+        </div>
+        <p class="placeholder-note">La fecha real se configurará más adelante.</p>
+      </div>
+    </section>
+
+    <section class="section editorial-section">
+      <div class="section-inner narrow reveal">
+        <p class="eyebrow">EL PLAN</p>
+        <h2>Una invitación hecha a medida</h2>
+        <p>Esta sección podrá incluir fotografías, mensaje personal, dress code, indicaciones especiales o cualquier detalle que quieras destacar.</p>
+        <div class="photo-placeholder" aria-label="Espacio reservado para fotografía">
+          <span>FOTO / VIDEO</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light-section">
+      <div class="section-inner reveal">
+        <p class="eyebrow dark">INFORMACIÓN</p>
+        <h2>Todo en un solo lugar</h2>
+        <div class="info-grid">
+          <article class="info-card">
+            <span class="info-icon">01</span>
+            <h3>Fecha y hora</h3>
+            <p>Datos del evento pendientes.</p>
+          </article>
+          <article class="info-card">
+            <span class="info-icon">02</span>
+            <h3>Ubicación</h3>
+            <p>Dirección y enlace a Google Maps.</p>
+          </article>
+          <article class="info-card">
+            <span class="info-icon">03</span>
+            <h3>Confirmación</h3>
+            <p>Podremos enlazar WhatsApp o un formulario.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-section">
+      <div class="section-inner narrow reveal">
+        <p class="eyebrow">NOS VEMOS PRONTO</p>
+        <h2>¿Te lo vas a perder?</h2>
+        <p>Los botones todavía son demostrativos. Los conectaremos cuando definamos ubicación y forma de confirmación.</p>
+        <div class="action-stack">
+          <button class="primary-button" type="button" disabled>Ver ubicación</button>
+          <button class="secondary-button" type="button" disabled>Confirmar asistencia</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
