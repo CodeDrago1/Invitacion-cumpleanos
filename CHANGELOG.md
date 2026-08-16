@@ -1,5 +1,18 @@
 # Historial de versiones
 
+## v0.5.0 — 2026-08-16
+
+- Responsive específico para escritorio 16:9.
+- Reducción de espacios muertos en periódico, contador, dossier y cierre.
+- Tipografías y anchos de contenido ampliados en desktop.
+- Mejor aprovechamiento de las fotografías panorámicas.
+- Cuenta regresiva más compacta en escritorio.
+- Nuevo cielo estrellado generado completamente con CSS.
+- Brillos champagne animados con efecto de parpadeo sutil.
+- Sin imágenes adicionales para el efecto de estrellas, evitando aumentar el peso de carga.
+- Respeto a `prefers-reduced-motion` para accesibilidad.
+- Caché de recursos actualizado a v5.0.
+
 ## v0.4.1 — 2026-08-16
 
 - Corrección de estilos introducidos en v0.4.
@@ -40,4 +53,4 @@
 
 ---
 
-A partir de v0.4.1, cada cambio relevante del proyecto debe actualizar este archivo y la versión indicada en `README.md`.
+Cada cambio relevante del proyecto debe actualizar este archivo y la versión indicada en `README.md`.
