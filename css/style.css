@@ -1,9 +1,14 @@
 :root {
-  --ink: #111111;
-  --paper: #f3eee5;
-  --paper-deep: #e8dfd1;
-  --muted: #a39c91;
-  --line: rgba(255,255,255,.22);
+  --ink: #070707;
+  --ink-soft: #111111;
+  --paper: #eee8dd;
+  --paper-deep: #d9cfbf;
+  --champagne: #d5b36a;
+  --champagne-soft: #ead8aa;
+  --cream: #f8f1e6;
+  --muted: #9f9587;
+  --line-dark: rgba(18, 18, 18, .18);
+  --line-light: rgba(255, 255, 255, .22);
 }
 
 * { box-sizing: border-box; }
@@ -15,6 +20,7 @@ body {
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
 }
+body::selection { background: var(--champagne); color: #111; }
 button, a { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 
@@ -22,139 +28,247 @@ button { -webkit-tap-highlight-color: transparent; }
   position: fixed;
   inset: 0;
   z-index: 100;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
-  min-height: 100dvh;
-  padding: 24px;
+  padding: 22px;
+  overflow: hidden;
   background:
-    radial-gradient(circle at 50% 35%, rgba(255,255,255,.08), transparent 32%),
-    #090909;
-  transition: opacity .8s ease, visibility .8s ease, transform .8s ease;
+    linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.82)),
+    url("https://w0.peakpx.com/wallpaper/922/534/HD-wallpaper-xoxo-gossip-girl-blair-gossipgirl-iphone-kiss-samsung-serena-series.jpg") center/cover no-repeat;
+  transition: opacity .85s ease, visibility .85s ease, transform .85s ease;
+}
+.intro-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 20%, rgba(213,179,106,.13), transparent 35%);
+  pointer-events: none;
 }
 .intro-screen.opened {
   opacity: 0;
   visibility: hidden;
-  transform: scale(1.04);
+  transform: scale(1.035);
 }
-.phone-card {
-  width: min(100%, 390px);
-  padding: 42px 28px 32px;
-  border: 1px solid rgba(255,255,255,.35);
-  background: rgba(20,20,20,.84);
-  box-shadow: 0 25px 80px rgba(0,0,0,.45);
-  text-align: center;
+.intro-glow {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(213,179,106,.12);
+  filter: blur(80px);
 }
-.eyebrow {
-  margin: 0 0 14px;
-  font-size: .72rem;
+.message-shell {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 430px);
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(6,6,6,.82);
+  box-shadow: 0 28px 90px rgba(0,0,0,.6);
+  backdrop-filter: blur(12px);
+}
+.message-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  color: #b9b9b9;
+  font-size: .62rem;
+  letter-spacing: .12em;
+}
+.message-body { padding: 34px 26px 26px; text-align: center; }
+.gg-mark {
+  margin: 0 0 24px;
+  color: var(--champagne-soft);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-style: italic;
+  letter-spacing: .04em;
+}
+.message-kicker,
+.eyebrow,
+.tiny-label,
+.issue-line,
+.card-label {
+  margin: 0;
+  font-size: .68rem;
   font-weight: 700;
-  letter-spacing: .25em;
+  letter-spacing: .24em;
   text-transform: uppercase;
 }
-.eyebrow.dark { color: #555047; }
-.divider { height: 1px; background: var(--line); margin: 20px 0 28px; }
-.phone-card p:not(.eyebrow):not(.hint) { margin: 9px 0; font-size: .9rem; letter-spacing: .05em; }
-.retro-button {
+.message-kicker { color: var(--champagne); margin-bottom: 14px; }
+.intro-title {
+  margin: 0 auto 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  font-size: clamp(2.3rem, 9vw, 3.6rem);
+  line-height: .98;
+}
+.message-copy { margin: 0 auto 24px; max-width: 330px; color: #c9c9c9; line-height: 1.7; font-size: .9rem; }
+.message-meta { border-top: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); padding: 13px 0; margin: 0 0 22px; }
+.message-meta p { margin: 7px 0; font-size: .72rem; letter-spacing: .12em; }
+.message-meta span { display: inline-block; width: 48px; color: #777; text-align: left; }
+.open-button {
   width: 100%;
-  margin-top: 28px;
-  padding: 15px 20px;
-  border: 0;
-  background: #fff;
-  color: #111;
+  border: 1px solid var(--champagne);
+  padding: 16px 18px;
+  background: var(--champagne);
+  color: #090909;
+  font-size: .72rem;
   font-weight: 800;
-  letter-spacing: .18em;
+  letter-spacing: .15em;
   cursor: pointer;
-  transition: transform .2s ease, opacity .2s ease;
+  transition: transform .2s ease, background .2s ease;
 }
-.retro-button:active { transform: scale(.98); }
-.hint { margin: 14px 0 0; color: #999; font-size: .72rem; }
+.open-button:hover { background: var(--champagne-soft); }
+.open-button:active { transform: scale(.985); }
+.signature { margin: 22px 0 0; font-family: "Cormorant Garamond", serif; font-size: 1.9rem; font-style: italic; color: var(--champagne-soft); }
 
-.invitation { opacity: 1; transition: opacity .6s ease; }
+.invitation { opacity: 1; transition: opacity .65s ease; }
 .invitation.is-hidden { opacity: 0; height: 100vh; overflow: hidden; }
-.section {
-  position: relative;
-  min-height: 78vh;
-  display: grid;
-  place-items: center;
-  padding: 88px 24px;
-}
+.section { position: relative; min-height: 78vh; display: grid; place-items: center; padding: 92px 24px; }
 .full-screen { min-height: 100dvh; }
+.section-inner, .hero-content { width: min(100%, 920px); margin: auto; text-align: center; }
+.narrow { width: min(100%, 620px); }
+
 .hero {
   isolation: isolate;
+  min-height: 100dvh;
   background:
-    linear-gradient(to bottom, rgba(0,0,0,.16), rgba(0,0,0,.72)),
-    radial-gradient(circle at 65% 25%, #4d4b47 0, #222 30%, #0d0d0d 70%);
-  text-align: center;
+    linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.5) 55%, rgba(0,0,0,.9)),
+    url("https://i.pinimg.com/736x/7f/c8/ce/7fc8ce7d777377adb375b202a392ee37.jpg") center/cover no-repeat;
 }
-.grain {
+.hero-overlay {
   position: absolute;
   inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.34), transparent 50%, rgba(0,0,0,.28));
   z-index: -1;
-  opacity: .12;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
-  pointer-events: none;
 }
-.hero-content, .section-inner { width: min(100%, 850px); margin: auto; text-align: center; }
-.narrow { width: min(100%, 620px); }
-h1, h2 {
+.hero-content { align-self: end; padding-bottom: 5vh; }
+.tiny-label { color: rgba(255,255,255,.78); margin-bottom: 18px; }
+.brand-lockup {
+  display: inline-flex;
+  gap: .18em;
+  align-items: baseline;
   font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
-  line-height: .95;
+  font-size: clamp(4.6rem, 18vw, 9.5rem);
+  font-style: italic;
+  line-height: .72;
+  text-shadow: 0 6px 35px rgba(0,0,0,.55);
 }
-h1 { margin: 10px auto 24px; max-width: 720px; font-size: clamp(3.6rem, 12vw, 7rem); }
-h2 { margin: 10px 0 22px; font-size: clamp(2.8rem, 9vw, 5rem); }
-h3 { font-family: "Cormorant Garamond", serif; font-size: 1.7rem; margin: 12px 0 8px; }
-.lead { max-width: 570px; margin: auto; color: #d0d0d0; line-height: 1.7; }
-.scroll-cue { display: inline-grid; place-items: center; width: 48px; height: 48px; margin-top: 45px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; color: #fff; text-decoration: none; animation: bob 1.8s infinite; }
-@keyframes bob { 50% { transform: translateY(7px); } }
-
-.light-section { background: var(--paper); color: var(--ink); }
-.editorial-section { background: #151515; }
-.final-section { min-height: 85vh; background: #090909; }
-.section-inner > p:not(.eyebrow):not(.placeholder-note) { line-height: 1.8; color: #b9b9b9; }
-.light-section .section-inner > p { color: #5e584f !important; }
-.countdown {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin: 38px auto 20px;
-}
-.countdown div { padding: 18px 5px; border-top: 1px solid #aaa297; border-bottom: 1px solid #aaa297; }
-.countdown span { display: block; font-family: "Cormorant Garamond", serif; font-size: clamp(2rem, 8vw, 3.7rem); }
-.countdown small { display: block; margin-top: 4px; color: #777066; font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; }
-.placeholder-note { color: #777066; font-size: .8rem; }
-.photo-placeholder {
-  aspect-ratio: 4 / 5;
-  max-width: 390px;
-  margin: 45px auto 0;
-  display: grid;
+.brand-lockup span:last-child { color: var(--champagne-soft); }
+.spotted-line { max-width: 520px; margin: 28px auto 0; color: #f1e9dd; line-height: 1.6; letter-spacing: .02em; }
+.scroll-cue {
+  display: inline-grid;
   place-items: center;
-  border: 1px solid rgba(255,255,255,.25);
-  background: linear-gradient(135deg, #242424, #101010);
-  color: #777;
-  font-size: .7rem;
-  letter-spacing: .2em;
+  width: 48px;
+  height: 48px;
+  margin-top: 34px;
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  animation: bob 1.8s infinite;
 }
-.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 42px; text-align: left; }
-.info-card { min-height: 210px; padding: 24px; border: 1px solid #c9c0b4; }
-.info-card p { margin: 0; color: #696158; line-height: 1.6; font-size: .9rem; }
-.info-icon { font-size: .72rem; font-weight: 700; letter-spacing: .15em; }
-.action-stack { display: grid; gap: 12px; max-width: 420px; margin: 38px auto 0; }
-.primary-button, .secondary-button { padding: 17px 22px; border: 1px solid #fff; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
-.primary-button { background: #fff; color: #111; }
-.secondary-button { background: transparent; color: #fff; }
-button:disabled { opacity: .45; }
+@keyframes bob { 50% { transform: translateY(8px); } }
 
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s ease; }
+h2, h3 { font-family: "Cormorant Garamond", serif; font-weight: 500; }
+h2 { margin: 13px 0 24px; font-size: clamp(3rem, 9vw, 5.4rem); line-height: .92; }
+h3 { margin: 7px 0 11px; font-size: 1.9rem; }
+.eyebrow { margin-bottom: 10px; }
+.eyebrow.dark { color: #655d52; }
+.eyebrow.champagne { color: var(--champagne); }
+
+.newspaper-section {
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.016), rgba(0,0,0,.016) 1px, transparent 1px, transparent 4px),
+    var(--paper);
+  color: #171717;
+}
+.issue-line { color: #5e584e; font-size: .57rem; }
+.newspaper-rule { height: 4px; border-top: 1px solid #171717; border-bottom: 1px solid #171717; margin: 18px 0 38px; }
+.newspaper-lead { max-width: 700px; margin: 0 auto; font-family: "Cormorant Garamond", serif; font-size: 1.45rem; line-height: 1.45; }
+.newspaper-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin: 44px auto 0; max-width: 760px; text-align: left; }
+.newspaper-columns p { margin: 0; color: #49443d; line-height: 1.8; font-size: .92rem; }
+
+.photo-story {
+  min-height: 92dvh;
+  isolation: isolate;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.photo-story-cast {
+  background-image: url("https://www.univision.com/_next/image?q=75&url=https%3A%2F%2Fuvn-brightspot.s3.amazonaws.com%2Fassets%2Fvixes%2Fg%2Fgg.jpg&w=1280");
+  background-position: center 25%;
+}
+.photo-story-xoxo {
+  background-image: url("https://w0.peakpx.com/wallpaper/922/534/HD-wallpaper-xoxo-gossip-girl-blair-gossipgirl-iphone-kiss-samsung-serena-series.jpg");
+}
+.photo-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgba(0,0,0,.14), rgba(0,0,0,.75)); }
+.photo-shade.warm { background: linear-gradient(to bottom, rgba(24,8,4,.08), rgba(0,0,0,.8)); }
+.story-caption { width: min(100%, 760px); align-self: end; text-align: left; padding-bottom: 3vh; }
+.story-caption h2 { max-width: 650px; text-shadow: 0 4px 24px rgba(0,0,0,.55); }
+.story-caption > p:last-child { color: #e7e0d7; line-height: 1.6; }
+.story-caption.align-bottom { align-self: end; }
+
+.countdown-section {
+  background: #0b0b0b;
+  overflow: hidden;
+}
+.countdown-section::before {
+  content: "XOXO";
+  position: absolute;
+  right: -5vw;
+  top: 1vh;
+  color: rgba(255,255,255,.025);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 34vw;
+  font-style: italic;
+  line-height: 1;
+}
+.countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 48px auto 22px; }
+.countdown div { padding: 22px 7px; border-top: 1px solid rgba(213,179,106,.54); border-bottom: 1px solid rgba(213,179,106,.54); }
+.countdown span { display: block; color: var(--cream); font-family: "Cormorant Garamond", serif; font-size: clamp(2.4rem, 8vw, 4.2rem); }
+.countdown small { display: block; margin-top: 5px; color: var(--champagne); font-size: .61rem; letter-spacing: .14em; text-transform: uppercase; }
+.placeholder-note { color: #777; font-size: .78rem; }
+
+.dossier-section { background: var(--paper); color: #141414; }
+.dossier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 44px; text-align: left; }
+.dossier-card { position: relative; min-height: 255px; padding: 28px 24px; border: 1px solid #afa598; background: rgba(255,255,255,.16); overflow: hidden; }
+.card-number { position: absolute; right: 12px; top: -12px; font-family: "Cormorant Garamond", serif; font-size: 5.4rem; color: rgba(0,0,0,.06); }
+.card-label { color: #7d7468; font-size: .58rem; }
+.dossier-card p:last-child { color: #665e55; line-height: 1.6; font-size: .87rem; }
+
+.final-section { min-height: 92dvh; background: radial-gradient(circle at 50% 34%, #1a1712 0, #0a0a0a 35%, #040404 76%); overflow: hidden; }
+.final-section .section-inner > p:not(.eyebrow):not(.big-xoxo):not(.gg-small) { color: #aaa; line-height: 1.75; }
+.final-orbit { position: absolute; border: 1px solid rgba(213,179,106,.12); border-radius: 50%; }
+.final-orbit-one { width: 540px; height: 540px; }
+.final-orbit-two { width: 760px; height: 760px; }
+.action-stack { display: grid; gap: 12px; max-width: 430px; margin: 38px auto 0; }
+.primary-button, .secondary-button { padding: 17px 22px; text-transform: uppercase; letter-spacing: .13em; font-size: .7rem; font-weight: 800; }
+.primary-button { border: 1px solid var(--champagne); background: var(--champagne); color: #0a0a0a; }
+.secondary-button { border: 1px solid rgba(255,255,255,.68); background: transparent; color: #fff; }
+button:disabled { opacity: .55; }
+.big-xoxo { margin: 62px 0 0; font-family: "Cormorant Garamond", serif; font-size: clamp(4rem, 17vw, 8rem); font-style: italic; line-height: .8; color: var(--champagne-soft); }
+.gg-small { margin: 18px 0 0; font-size: .58rem; letter-spacing: .35em; color: #686868; }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .95s ease, transform .95s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 680px) {
-  .section { min-height: 75vh; padding: 72px 20px; }
+@media (max-width: 720px) {
+  .section { min-height: 74vh; padding: 76px 20px; }
   .full-screen { min-height: 100dvh; }
-  .info-grid { grid-template-columns: 1fr; }
-  .info-card { min-height: auto; }
+  .hero { background-position: center; }
+  .brand-lockup { flex-direction: column; gap: 0; align-items: center; }
+  .newspaper-columns { grid-template-columns: 1fr; gap: 20px; }
+  .dossier-grid { grid-template-columns: 1fr; }
+  .dossier-card { min-height: 190px; }
+  .story-caption { padding: 0 2px 2vh; }
+  .photo-story-cast { background-position: 47% center; }
   .countdown { gap: 4px; }
-  .countdown div { padding: 14px 2px; }
+  .countdown div { padding: 17px 3px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
