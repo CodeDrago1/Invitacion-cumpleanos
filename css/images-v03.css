@@ -1,0 +1,52 @@
+/* v0.3 · Recursos visuales en alta resolución */
+
+/* Upper East Side nocturno, 3000px. Fuente: Unsplash. */
+.intro-screen {
+  background:
+    linear-gradient(rgba(0,0,0,.56), rgba(0,0,0,.84)),
+    url("https://images.unsplash.com/photo-1625558069373-3c3f35ff501f?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000") center/cover no-repeat;
+}
+
+/* Skyline de Manhattan de noche, 3000px. Fuente: Unsplash. */
+.hero {
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.48) 55%, rgba(0,0,0,.92)),
+    url("https://images.unsplash.com/photo-1606064508236-a8b1fef22ccd?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000") center/cover no-repeat;
+}
+
+/* Imagen promocional del elenco original. La URL sirve el original del CDN. */
+.photo-story-cast {
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,.02), rgba(0,0,0,.22)),
+    url("https://cloudfront-eu-central-1.images.arcpublishing.com/prisaradiolos40/PBSCMWKQMRNWFBIBVH2VLORCSA.jpg");
+  background-position: center 34%;
+  background-size: cover;
+}
+
+/* Segunda escena urbana en alta resolución para mantener nitidez en pantallas grandes. */
+.photo-story-xoxo {
+  background-image:
+    linear-gradient(to bottom, rgba(16,5,2,.08), rgba(0,0,0,.34)),
+    url("https://images.unsplash.com/photo-1625558069373-3c3f35ff501f?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000");
+  background-position: center 58%;
+}
+
+/* Evita que el navegador aplique escalados innecesariamente agresivos. */
+.intro-screen,
+.hero,
+.photo-story {
+  image-rendering: auto;
+  background-attachment: scroll;
+}
+
+@media (min-width: 1100px) {
+  .hero { background-position: center 46%; }
+  .photo-story-cast { background-position: center 30%; }
+}
+
+@media (max-width: 720px) {
+  .intro-screen { background-position: 52% center; }
+  .hero { background-position: 54% center; }
+  .photo-story-cast { background-position: 50% center; }
+  .photo-story-xoxo { background-position: 50% center; }
+}
