@@ -2,24 +2,26 @@
 
 Invitación web interactiva y responsive inspirada en la estética de *Gossip Girl*, pensada principalmente para visualizarse desde teléfonos móviles y compartirse mediante un enlace.
 
-## Estado actual — v0.4.1
+## Estado actual — v0.5.0
 
 - Pantalla de apertura tipo mensaje privado de Gossip Girl.
 - Portada con estética Upper East Side / Manhattan.
 - Secciones editoriales tipo periódico, dossier y collage.
 - Imágenes en alta resolución para fondos principales.
 - Cuenta regresiva funcional con fecha provisional.
-- Diseño mobile-first optimizado para pantallas de celular.
+- Cielo estrellado animado y brillos sutiles en la cuenta regresiva.
+- Diseño mobile-first optimizado para celular.
+- Composición específica para escritorio 16:9 con mejor aprovechamiento del espacio.
+- Secciones de periódico, contador, dossier y cierre redimensionadas para desktop.
 - Animaciones de aparición y transición de entrada.
-- Ajustes de estabilidad en CSS y JavaScript.
-- Corrección de caché para asegurar que GitHub Pages cargue la versión más reciente.
+- Compatibilidad con `prefers-reduced-motion` para reducir animaciones cuando el dispositivo lo solicita.
 
 ## Estructura
 
 - `index.html` — estructura de la invitación.
 - `css/style.css` — estilos base.
 - `css/images-v03.css` — recursos visuales de alta resolución.
-- `css/v04.css` — ajustes móviles y composición editorial/collage.
+- `css/v04.css` — responsive, composición editorial y efectos visuales (actualizado para v0.5.0).
 - `js/main.js` — apertura, animaciones y contador.
 - `CHANGELOG.md` — historial de versiones del proyecto.
 
