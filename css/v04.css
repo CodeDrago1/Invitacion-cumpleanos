@@ -1,6 +1,5 @@
-/* v0.4.1 · Ajustes móviles y estética editorial/collage, versión estable */
+/* v0.5.0 · Responsive desktop + cielo estrellado */
 
-/* Detalles editoriales que no dependen de imágenes externas frágiles. */
 .photo-story-cast,
 .photo-story-xoxo {
   position: relative;
@@ -23,7 +22,6 @@
   transform: rotate(2deg);
 }
 
-/* Imagen promocional estable en lugar del enlace de TMDB que podía fallar. */
 .photo-story-xoxo {
   background-image:
     linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.74)),
@@ -48,8 +46,216 @@
   pointer-events: none;
 }
 
+/* Cielo estrellado: capas CSS sin imágenes ni peso adicional. */
+.countdown-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.countdown-section .section-inner {
+  position: relative;
+  z-index: 4;
+}
+
+.countdown-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .72;
+  background-image:
+    radial-gradient(circle at 8% 18%, rgba(255,244,205,.95) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 17% 72%, rgba(255,255,255,.82) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 27% 34%, rgba(224,212,171,.9) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 38% 81%, rgba(255,255,255,.78) 0 .9px, transparent 1.7px),
+    radial-gradient(circle at 48% 15%, rgba(255,239,187,.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 59% 62%, rgba(255,255,255,.88) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 69% 26%, rgba(228,211,158,.92) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 78% 78%, rgba(255,255,255,.8) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 88% 42%, rgba(255,237,181,.9) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 94% 13%, rgba(255,255,255,.82) 0 .9px, transparent 1.7px),
+    radial-gradient(circle at 13% 48%, rgba(255,255,255,.58) 0 .7px, transparent 1.5px),
+    radial-gradient(circle at 33% 9%, rgba(255,255,255,.55) 0 .7px, transparent 1.5px),
+    radial-gradient(circle at 52% 88%, rgba(255,255,255,.58) 0 .7px, transparent 1.5px),
+    radial-gradient(circle at 73% 53%, rgba(255,255,255,.55) 0 .7px, transparent 1.5px),
+    radial-gradient(circle at 91% 69%, rgba(255,255,255,.55) 0 .7px, transparent 1.5px);
+  filter: drop-shadow(0 0 4px rgba(240,210,130,.28));
+  animation: starTwinkle 5.5s ease-in-out infinite alternate;
+}
+
+.countdown-section .section-inner::before,
+.countdown-section .section-inner::after {
+  content: "✦";
+  position: absolute;
+  z-index: -1;
+  color: rgba(224,193,117,.55);
+  text-shadow: 0 0 10px rgba(235,205,135,.55), 0 0 24px rgba(235,205,135,.2);
+  animation: sparklePulse 3.8s ease-in-out infinite;
+}
+
+.countdown-section .section-inner::before {
+  top: -18%;
+  left: 4%;
+  font-size: 1.25rem;
+}
+
+.countdown-section .section-inner::after {
+  right: 6%;
+  bottom: -12%;
+  font-size: .9rem;
+  animation-delay: -1.9s;
+}
+
+@keyframes starTwinkle {
+  0% { opacity: .45; transform: scale(1); }
+  50% { opacity: .82; }
+  100% { opacity: .58; transform: scale(1.006); }
+}
+
+@keyframes sparklePulse {
+  0%, 100% { opacity: .22; transform: scale(.72) rotate(0deg); }
+  50% { opacity: .92; transform: scale(1.18) rotate(18deg); }
+}
+
+/* Desktop real: aprovechar el ancho sin dejar bloques desproporcionados. */
+@media (min-width: 1000px) {
+  .hero {
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    width: min(900px, 76vw);
+  }
+
+  .newspaper-section {
+    min-height: 76vh;
+    padding: 72px 5vw;
+    display: flex;
+    align-items: center;
+  }
+
+  .newspaper-section .section-inner {
+    width: min(1120px, 78vw);
+  }
+
+  .newspaper-section h2 {
+    max-width: 900px;
+    margin-inline: auto;
+    font-size: clamp(4.4rem, 5.4vw, 6.6rem);
+    line-height: .93;
+  }
+
+  .newspaper-lead {
+    max-width: 900px;
+    margin-inline: auto;
+    font-size: 1.45rem;
+  }
+
+  .newspaper-columns {
+    max-width: 920px;
+    margin: 42px auto 0;
+    gap: 72px;
+  }
+
+  .photo-story {
+    min-height: 82vh;
+  }
+
+  .story-caption {
+    width: min(720px, 44vw);
+    margin-left: clamp(6vw, 16vw, 18vw);
+  }
+
+  .story-caption h2 {
+    font-size: clamp(4rem, 5vw, 6.3rem);
+    line-height: .92;
+  }
+
+  .countdown-section {
+    min-height: 68vh;
+    padding: 76px 5vw;
+    display: flex;
+    align-items: center;
+  }
+
+  .countdown-section .section-inner {
+    width: min(1050px, 76vw);
+  }
+
+  .countdown-section h2 {
+    font-size: clamp(4rem, 5vw, 6rem);
+    line-height: .95;
+  }
+
+  .countdown {
+    max-width: 980px;
+    margin: 46px auto 22px;
+  }
+
+  .countdown span {
+    font-size: clamp(3.4rem, 4.2vw, 5.4rem);
+  }
+
+  .dossier-section {
+    min-height: 76vh;
+    padding: 76px 5vw;
+    display: flex;
+    align-items: center;
+  }
+
+  .dossier-section .section-inner {
+    width: min(1120px, 80vw);
+  }
+
+  .dossier-section h2 {
+    max-width: 920px;
+    margin-inline: auto;
+    font-size: clamp(4.4rem, 5.2vw, 6.2rem);
+    line-height: .92;
+  }
+
+  .dossier-grid {
+    margin-top: 52px;
+    gap: 22px;
+  }
+
+  .dossier-card {
+    min-height: 280px;
+    padding: 36px 32px;
+  }
+
+  .dossier-card h3 {
+    font-size: clamp(2rem, 2.2vw, 2.8rem);
+  }
+
+  .final-section {
+    min-height: 82vh;
+    padding: 80px 5vw;
+  }
+
+  .final-section .section-inner {
+    width: min(760px, 58vw);
+  }
+
+  .final-section h2 {
+    font-size: clamp(4.6rem, 5.6vw, 6.8rem);
+    line-height: .9;
+  }
+
+  .final-section .section-inner > p:not(.eyebrow):not(.big-xoxo):not(.gg-small) {
+    font-size: 1.2rem;
+    line-height: 1.7;
+  }
+
+  .action-stack {
+    max-width: 620px;
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 720px) {
-  /* Portada: menos vacío superior y composición más compacta. */
   .hero {
     min-height: 92dvh;
     padding: 48px 20px 38px;
@@ -60,81 +266,30 @@
   }
   .tiny-label { margin-bottom: 10px; }
   .brand-lockup { font-size: clamp(4rem, 20vw, 6.1rem); }
-  .spotted-line {
-    margin-top: 18px;
-    font-size: .94rem;
-  }
-  .scroll-cue {
-    margin-top: 20px;
-    width: 44px;
-    height: 44px;
-  }
+  .spotted-line { margin-top: 18px; font-size: .94rem; }
+  .scroll-cue { margin-top: 20px; width: 44px; height: 44px; }
 
-  /* Editorial: mantiene el estilo, pero evita una sección excesivamente larga. */
-  .newspaper-section {
-    min-height: auto;
-    padding: 54px 20px 58px;
-  }
+  .newspaper-section { min-height: auto; padding: 54px 20px 58px; }
   .newspaper-rule { margin: 14px 0 25px; }
-  .newspaper-section h2 {
-    font-size: clamp(2.75rem, 12.5vw, 3.9rem);
-    margin-bottom: 18px;
-  }
-  .newspaper-lead {
-    font-size: 1.22rem;
-    line-height: 1.36;
-  }
-  .newspaper-columns {
-    margin-top: 24px;
-    gap: 12px;
-  }
-  .newspaper-columns p {
-    font-size: .87rem;
-    line-height: 1.58;
-  }
+  .newspaper-section h2 { font-size: clamp(2.75rem, 12.5vw, 3.9rem); margin-bottom: 18px; }
+  .newspaper-lead { font-size: 1.22rem; line-height: 1.36; }
+  .newspaper-columns { margin-top: 24px; gap: 12px; }
+  .newspaper-columns p { font-size: .87rem; line-height: 1.58; }
 
-  /* Fotografías: altura controlada y textos siempre dentro del área visible. */
-  .photo-story {
-    min-height: 78dvh;
-    padding: 52px 22px 42px;
-  }
+  .photo-story { min-height: 78dvh; padding: 52px 22px 42px; }
   .photo-story-cast { background-position: 50% 30%; }
-  .photo-story-xoxo {
-    min-height: 78dvh;
-    background-position: 50% 24%;
-  }
-  .story-caption {
-    align-self: end;
-    padding-bottom: 0;
-  }
-  .story-caption h2 {
-    font-size: clamp(3rem, 13vw, 4.5rem);
-    overflow-wrap: break-word;
-  }
+  .photo-story-xoxo { min-height: 78dvh; background-position: 50% 24%; }
+  .story-caption { align-self: end; padding-bottom: 0; }
+  .story-caption h2 { font-size: clamp(3rem, 13vw, 4.5rem); overflow-wrap: break-word; }
 
-  /* Cuenta regresiva: elimina el gran bloque negro vacío. */
-  .countdown-section {
-    min-height: 62dvh;
-    padding: 54px 20px 58px;
-  }
-  .countdown-section::before {
-    top: 1vh;
-    font-size: 40vw;
-  }
-  .countdown-section h2 {
-    font-size: clamp(2.8rem, 12vw, 4.1rem);
-  }
-  .countdown {
-    margin: 30px auto 14px;
-  }
+  .countdown-section { min-height: 62dvh; padding: 54px 20px 58px; }
+  .countdown-section::before { top: 1vh; font-size: 40vw; }
+  .countdown-section::after { opacity: .62; }
+  .countdown-section h2 { font-size: clamp(2.8rem, 12vw, 4.1rem); }
+  .countdown { margin: 30px auto 14px; }
   .placeholder-note { margin-bottom: 0; }
 
-  /* Dossier: más invitación/editorial, menos bloque corporativo. */
-  .dossier-section {
-    min-height: auto;
-    padding: 58px 20px 64px;
-    overflow: hidden;
-  }
+  .dossier-section { min-height: auto; padding: 58px 20px 64px; overflow: hidden; }
   .dossier-section .section-inner { position: relative; }
   .dossier-section .section-inner::before,
   .dossier-section .section-inner::after {
@@ -147,49 +302,29 @@
     font-size: 5.2rem;
     pointer-events: none;
   }
-  .dossier-section .section-inner::before {
-    top: 112px;
-    left: -48px;
-    transform: rotate(-8deg);
-  }
-  .dossier-section .section-inner::after {
-    bottom: 72px;
-    right: -62px;
-    transform: rotate(9deg);
-  }
+  .dossier-section .section-inner::before { top: 112px; left: -48px; transform: rotate(-8deg); }
+  .dossier-section .section-inner::after { bottom: 72px; right: -62px; transform: rotate(9deg); }
   .dossier-section h2,
   .dossier-section .eyebrow,
-  .dossier-grid {
-    position: relative;
-    z-index: 1;
-  }
-  .dossier-section h2 {
-    font-size: clamp(3rem, 12.5vw, 4.2rem);
-    margin-bottom: 26px;
-  }
-  .dossier-grid {
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .dossier-card {
-    min-height: 165px;
-    padding: 23px 21px;
-    background: rgba(255,255,255,.34);
-    box-shadow: 0 14px 30px rgba(54,44,30,.07);
-  }
+  .dossier-grid { position: relative; z-index: 1; }
+  .dossier-section h2 { font-size: clamp(3rem, 12.5vw, 4.2rem); margin-bottom: 26px; }
+  .dossier-grid { gap: 16px; margin-top: 24px; }
+  .dossier-card { min-height: 165px; padding: 23px 21px; background: rgba(255,255,255,.34); box-shadow: 0 14px 30px rgba(54,44,30,.07); }
   .dossier-card:nth-child(1) { transform: rotate(-.7deg); }
   .dossier-card:nth-child(2) { transform: rotate(.6deg); }
   .dossier-card:nth-child(3) { transform: rotate(-.4deg); }
 
-  .final-section {
-    min-height: 80dvh;
-    padding: 64px 20px;
-  }
-  .final-section h2 {
-    font-size: clamp(3rem, 12.5vw, 4.25rem);
-    overflow-wrap: break-word;
-  }
+  .final-section { min-height: 80dvh; padding: 64px 20px; }
+  .final-section h2 { font-size: clamp(3rem, 12.5vw, 4.25rem); overflow-wrap: break-word; }
   .big-xoxo { margin-top: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .countdown-section::after,
+  .countdown-section .section-inner::before,
+  .countdown-section .section-inner::after {
+    animation: none;
+  }
 }
 
 @media (max-width: 390px) {
