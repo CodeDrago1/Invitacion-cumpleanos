@@ -9,9 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5.0" />
-  <link rel="stylesheet" href="css/images-v03.css?v=5.0" />
-  <link rel="stylesheet" href="css/v04.css?v=5.0" />
+  <link rel="stylesheet" href="css/style.css?v=6.0" />
+  <link rel="stylesheet" href="css/images-v03.css?v=6.0" />
+  <link rel="stylesheet" href="css/v04.css?v=6.0" />
+  <link rel="stylesheet" href="css/rsvp-v06.css?v=6.0" />
 </head>
 <body>
   <div id="intro" class="intro-screen">
@@ -27,6 +28,7 @@
       </div>
     </div>
   </div>
+
   <main id="invitation" class="invitation is-hidden">
     <section class="hero section full-screen"><div class="hero-overlay"></div><div class="hero-content reveal"><p class="tiny-label">YOU KNOW YOU LOVE ME</p><div class="brand-lockup"><span>gossip</span><span>girl</span></div><p class="spotted-line">SPOTTED: una celebración que nadie querrá perderse.</p><a class="scroll-cue" href="#spotted" aria-label="Ver invitación">↓</a></div></section>
     <section id="spotted" class="section newspaper-section"><div class="section-inner reveal"><p class="issue-line">THE UPPER EAST SIDE DAILY · EDICIÓN ESPECIAL</p><div class="newspaper-rule"></div><p class="eyebrow dark">ÚLTIMA HORA</p><h2>Hay una fiesta en la ciudad.</h2><p class="newspaper-lead">Todavía no revelaremos todos los detalles. Solo diremos que tu nombre apareció en la lista y que sería un error ignorar esta invitación.</p><div class="newspaper-columns"><p>Una noche, un grupo selecto de invitados y suficientes secretos para mantener ocupada a Gossip Girl.</p><p>Por ahora solo necesitas una cosa: reservar la fecha. El resto será revelado muy pronto.</p></div></div></section>
@@ -34,8 +36,57 @@
     <section id="countdown" class="section countdown-section"><div class="section-inner reveal"><p class="eyebrow champagne">SAVE THE DATE</p><h2>La cuenta atrás ya empezó.</h2><div class="countdown" aria-live="polite"><div><span id="days">00</span><small>Días</small></div><div><span id="hours">00</span><small>Horas</small></div><div><span id="minutes">00</span><small>Min</small></div><div><span id="seconds">00</span><small>Seg</small></div></div><p class="placeholder-note">Fecha provisional. La reemplazaremos por la del evento.</p></div></section>
     <section class="section photo-story photo-story-xoxo"><div class="photo-shade warm"></div><div class="story-caption align-bottom reveal"><p class="eyebrow">CONFIDENTIAL</p><h2>Un poco de glamour. Un poco de misterio.</h2><p>Y probablemente una historia que valga la pena contar al día siguiente.</p></div></section>
     <section class="section dossier-section"><div class="section-inner reveal"><p class="eyebrow dark">THE DOSSIER</p><h2>Lo que sabemos hasta ahora</h2><div class="dossier-grid"><article class="dossier-card"><span class="card-number">01</span><p class="card-label">CUÁNDO</p><h3>Fecha y hora</h3><p>Información clasificada por ahora.</p></article><article class="dossier-card"><span class="card-number">02</span><p class="card-label">DÓNDE</p><h3>Ubicación</h3><p>La dirección será revelada aquí.</p></article><article class="dossier-card"><span class="card-number">03</span><p class="card-label">DRESS CODE</p><h3>Look de la noche</h3><p>El código de vestimenta llegará pronto.</p></article></div></div></section>
-    <section class="section final-section"><div class="final-orbit final-orbit-one"></div><div class="final-orbit final-orbit-two"></div><div class="section-inner narrow reveal"><p class="eyebrow champagne">ONE LAST THING</p><h2>¿Te lo vas a perder?</h2><p>Cuando tengamos los datos reales, aquí podrás abrir la ubicación y confirmar tu asistencia en segundos.</p><div class="action-stack"><button class="primary-button" type="button" disabled>VER UBICACIÓN</button><button class="secondary-button" type="button" disabled>CONFIRMAR ASISTENCIA</button></div><p class="big-xoxo">XOXO</p><p class="gg-small">GOSSIP GIRL</p></div></section>
+    <section class="section final-section"><div class="final-orbit final-orbit-one"></div><div class="final-orbit final-orbit-two"></div><div class="section-inner narrow reveal"><p class="eyebrow champagne">ONE LAST THING</p><h2>¿Te lo vas a perder?</h2><p>Cuando tengamos los datos reales, aquí podrás abrir la ubicación y confirmar tu asistencia en segundos.</p><div class="action-stack"><button class="primary-button" type="button" disabled>VER UBICACIÓN</button><button id="rsvpOpen" class="secondary-button rsvp-enabled" type="button">CONFIRMAR ASISTENCIA</button></div><p class="big-xoxo">XOXO</p><p class="gg-small">GOSSIP GIRL</p></div></section>
   </main>
-  <script src="js/main.js?v=5.0"></script>
+
+  <div id="rsvpModal" class="rsvp-modal" aria-hidden="true">
+    <div class="rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+      <button id="rsvpClose" class="rsvp-close" type="button" aria-label="Cerrar">×</button>
+      <div id="rsvpFormView">
+        <p class="rsvp-kicker">GOSSIP GIRL QUIERE SABER</p>
+        <h2 id="rsvpTitle">¿Estarás en la lista?</h2>
+        <p class="rsvp-intro">Confirma tu asistencia antes de que alguien más cuente la historia por ti.</p>
+        <form id="rsvpForm" class="rsvp-form">
+          <div class="rsvp-field">
+            <label for="rsvpName">Tu nombre</label>
+            <input id="rsvpName" name="nombre" type="text" autocomplete="name" required maxlength="80" />
+          </div>
+          <fieldset class="rsvp-field" style="border:0;padding:0;margin:0">
+            <legend>¿Asistirás?</legend>
+            <div class="rsvp-choice">
+              <label><input type="radio" name="asistencia" value="Sí" required /> Sí, estaré ahí</label>
+              <label><input type="radio" name="asistencia" value="No" required /> No podré asistir</label>
+            </div>
+          </fieldset>
+          <fieldset class="rsvp-field" style="border:0;padding:0;margin:0">
+            <legend>¿Vendrás acompañado/a?</legend>
+            <div class="rsvp-choice">
+              <label><input type="radio" name="acompanante" value="Sí" /> Sí</label>
+              <label><input type="radio" name="acompanante" value="No" checked /> No</label>
+            </div>
+          </fieldset>
+          <div id="companionField" class="rsvp-field rsvp-companion">
+            <label for="companionName">Nombre del acompañante</label>
+            <input id="companionName" name="nombreAcompanante" type="text" maxlength="80" />
+          </div>
+          <div class="rsvp-field">
+            <label for="rsvpMessage">Mensaje opcional</label>
+            <textarea id="rsvpMessage" name="mensaje" maxlength="300" placeholder="Un secreto, una nota o simplemente un XOXO..."></textarea>
+          </div>
+          <button id="rsvpSubmit" class="rsvp-submit" type="submit">ENVIAR CONFIRMACIÓN</button>
+          <p id="rsvpStatus" class="rsvp-status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div id="rsvpSuccess" class="rsvp-success" aria-live="polite">
+        <p class="rsvp-kicker">MENSAJE RECIBIDO</p>
+        <p class="success-title">Tu respuesta ya está en la lista.</p>
+        <p>Gossip Girl ha tomado nota. Nos vemos donde empiezan las mejores historias.</p>
+        <p class="success-xoxo">XOXO</p>
+        <button id="rsvpDone" class="rsvp-done-button" type="button">CERRAR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=6.0"></script>
 </body>
 </html>
