@@ -2,7 +2,7 @@
 
 Invitación web interactiva y responsive inspirada en la estética de *Gossip Girl*, pensada principalmente para visualizarse desde teléfonos móviles y compartirse mediante un enlace.
 
-## Estado actual — v0.5.0
+## Estado actual — v0.6.0
 
 - Pantalla de apertura tipo mensaje privado de Gossip Girl.
 - Portada con estética Upper East Side / Manhattan.
@@ -10,23 +10,26 @@ Invitación web interactiva y responsive inspirada en la estética de *Gossip Gi
 - Imágenes en alta resolución para fondos principales.
 - Cuenta regresiva funcional con fecha provisional.
 - Cielo estrellado animado y brillos sutiles en la cuenta regresiva.
-- Diseño mobile-first optimizado para celular.
-- Composición específica para escritorio 16:9 con mejor aprovechamiento del espacio.
-- Secciones de periódico, contador, dossier y cierre redimensionadas para desktop.
-- Animaciones de aparición y transición de entrada.
-- Compatibilidad con `prefers-reduced-motion` para reducir animaciones cuando el dispositivo lo solicita.
+- Diseño mobile-first optimizado para celular y responsive específico para escritorio 16:9.
+- RSVP integrado dentro de la propia invitación.
+- Formulario para nombre, asistencia, acompañante y mensaje opcional.
+- Pantalla final temática: “Confirmación recibida · XOXO”.
+- Preparación para guardar respuestas automáticamente en Google Sheets mediante Google Apps Script.
+- Modo demo temporal mientras se configura la URL del Web App.
 
 ## Estructura
 
-- `index.html` — estructura de la invitación.
+- `index.html` — estructura principal y modal RSVP.
 - `css/style.css` — estilos base.
 - `css/images-v03.css` — recursos visuales de alta resolución.
-- `css/v04.css` — responsive, composición editorial y efectos visuales (actualizado para v0.5.0).
-- `js/main.js` — apertura, animaciones y contador.
+- `css/v04.css` — responsive, composición editorial, desktop y efectos visuales.
+- `css/rsvp-v06.css` — estilos del formulario de confirmación.
+- `js/main.js` — apertura, animaciones, contador y lógica RSVP.
+- `google-apps-script/Code.gs` — backend preparado para guardar respuestas en Google Sheets.
 - `CHANGELOG.md` — historial de versiones del proyecto.
 
 ## Sitio publicado
 
 https://codedrago1.github.io/Invitacion-cumpleanos/
 
-Los datos actuales siguen siendo demostrativos y serán sustituidos por la información real del evento.
+Los datos del evento actuales siguen siendo demostrativos. Para activar el guardado real de RSVP falta desplegar el Google Apps Script y colocar su URL en `RSVP_ENDPOINT` dentro de `js/main.js`.
