@@ -1,5 +1,19 @@
 # Historial de versiones
 
+## v0.6.0 — 2026-08-16
+
+- Activación del botón “Confirmar asistencia”.
+- Modal RSVP integrado dentro de la invitación.
+- Campos para nombre, asistencia, acompañante y mensaje opcional.
+- Campo de nombre del acompañante mostrado solo cuando corresponde.
+- Pantalla temática de confirmación “Mensaje recibido · XOXO”.
+- Estado visual del botón cambia a “Asistencia registrada ✓”.
+- Modo demo local mientras se conecta Google Sheets.
+- Backend de Google Apps Script incluido en `google-apps-script/Code.gs`.
+- Preparación para guardar automáticamente fecha, nombre, asistencia, acompañante, mensaje y URL de la invitación.
+- Nueva hoja de estilos `css/rsvp-v06.css`.
+- Caché de recursos actualizado a v6.0.
+
 ## v0.5.0 — 2026-08-16
 
 - Responsive específico para escritorio 16:9.
