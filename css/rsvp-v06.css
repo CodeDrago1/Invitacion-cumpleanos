@@ -1,0 +1,152 @@
+/* v0.6.0 · RSVP temático Gossip Girl */
+.rsvp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0,0,0,.78);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.rsvp-modal.is-open { opacity: 1; visibility: visible; }
+.rsvp-dialog {
+  width: min(100%, 560px);
+  max-height: min(86dvh, 760px);
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid rgba(213,179,106,.5);
+  background:
+    radial-gradient(circle at 85% 10%, rgba(213,179,106,.11), transparent 25%),
+    #0a0a0a;
+  color: #fff;
+  box-shadow: 0 30px 100px rgba(0,0,0,.65);
+  padding: 34px 30px 30px;
+}
+.rsvp-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+.rsvp-kicker {
+  color: #d5b36a;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.rsvp-dialog h2 {
+  margin: 0 48px 10px 0;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+}
+.rsvp-intro { color: #b8b8b8; line-height: 1.65; margin: 0 0 26px; }
+.rsvp-form { display: grid; gap: 18px; }
+.rsvp-field { display: grid; gap: 8px; text-align: left; }
+.rsvp-field label,
+.rsvp-field legend {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #d9c38b;
+}
+.rsvp-field input,
+.rsvp-field textarea,
+.rsvp-field select {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.24);
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  padding: 13px 14px;
+  border-radius: 0;
+  outline: none;
+}
+.rsvp-field input:focus,
+.rsvp-field textarea:focus,
+.rsvp-field select:focus { border-color: #d5b36a; }
+.rsvp-field textarea { min-height: 90px; resize: vertical; }
+.rsvp-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.rsvp-choice label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  cursor: pointer;
+  color: #eee;
+  font-size: .86rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.rsvp-choice input { width: auto; accent-color: #d5b36a; }
+.rsvp-companion { display: none; }
+.rsvp-companion.is-visible { display: grid; }
+.rsvp-submit {
+  margin-top: 4px;
+  border: 1px solid #d5b36a;
+  background: #d5b36a;
+  color: #0b0b0b;
+  padding: 15px 18px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.rsvp-submit:disabled { opacity: .55; cursor: wait; }
+.rsvp-status { min-height: 1.3em; margin: 0; color: #aaa; font-size: .8rem; text-align: center; }
+.rsvp-success {
+  display: none;
+  text-align: center;
+  padding: 24px 0 10px;
+}
+.rsvp-success.is-visible { display: block; }
+.rsvp-success .success-xoxo {
+  margin: 10px 0 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(4rem, 16vw, 7rem);
+  font-style: italic;
+  color: #ead8aa;
+}
+.rsvp-success p { color: #bbb; line-height: 1.6; }
+.rsvp-success .success-title {
+  color: #fff;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem;
+  margin: 0 0 8px;
+}
+.rsvp-done-button {
+  margin-top: 16px;
+  border: 1px solid rgba(255,255,255,.55);
+  background: transparent;
+  color: #fff;
+  padding: 13px 22px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+body.rsvp-lock { overflow: hidden !important; }
+
+.secondary-button.rsvp-enabled { opacity: 1; cursor: pointer; }
+.secondary-button.rsvp-confirmed { border-color: #d5b36a; color: #ead8aa; }
+
+@media (max-width: 560px) {
+  .rsvp-modal { padding: 12px; }
+  .rsvp-dialog { padding: 30px 20px 24px; max-height: 90dvh; }
+  .rsvp-choice { grid-template-columns: 1fr; }
+}
