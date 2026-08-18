@@ -1,4 +1,5 @@
-const SHEET_NAME = 'RSVP';
+const SPREADSHEET_ID = '1d5bR_FDadNgpmo5-ygRaHwgt1jSSkBPiK_LiaAA6plM';
+const SHEET_NAME = 'Confirmaciones';
 
 function doPost(e) {
   try {
@@ -6,28 +7,29 @@ function doPost(e) {
     const sheet = getOrCreateSheet_();
 
     sheet.appendRow([
-      new Date(),
+      Utilities.formatDate(new Date(), 'America/Lima', 'dd/MM/yyyy HH:mm:ss'),
       payload.nombre || '',
       payload.asistencia || '',
       payload.acompanante || '',
       payload.nombreAcompanante || '',
       payload.mensaje || '',
+      payload.evento || 'Cumpleaños de Melissa · 29/08/2026 20:00',
       payload.invitadoUrl || '',
       payload.userAgent || ''
     ]);
 
-    return jsonResponse_({ ok: true });
+    return jsonResponse_({ ok: true, message: 'Confirmación registrada' });
   } catch (error) {
     return jsonResponse_({ ok: false, error: String(error) });
   }
 }
 
 function doGet() {
-  return jsonResponse_({ ok: true, service: 'RSVP Gossip Girl' });
+  return jsonResponse_({ ok: true, service: 'RSVP Melissa', spreadsheetId: SPREADSHEET_ID });
 }
 
 function getOrCreateSheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   let sheet = ss.getSheetByName(SHEET_NAME);
 
   if (!sheet) {
@@ -42,9 +44,11 @@ function getOrCreateSheet_() {
       '¿Acompañante?',
       'Nombre acompañante',
       'Mensaje',
+      'Evento',
       'URL invitación',
       'Navegador'
     ]);
+    sheet.setFrozenRows(1);
   }
 
   return sheet;
