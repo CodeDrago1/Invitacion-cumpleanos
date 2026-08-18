@@ -1,9 +1,15 @@
 const intro = document.querySelector('#intro');
 const invitation = document.querySelector('#invitation');
 const openButton = document.querySelector('#openInvitation');
+const backgroundMusic = document.querySelector('#backgroundMusic');
+
+if (backgroundMusic) backgroundMusic.volume = 0.32;
 
 if (intro && invitation && openButton) {
   openButton.addEventListener('click', () => {
+    if (backgroundMusic) {
+      backgroundMusic.play().catch((error) => console.warn('No se pudo iniciar la música:', error));
+    }
     invitation.classList.remove('is-hidden');
     document.body.style.overflow = 'auto';
     requestAnimationFrame(() => {
@@ -28,26 +34,14 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
 }
 
-// Fecha real: 29/08/2026 20:00, Lima (UTC-5).
 const eventDate = new Date('2026-08-29T20:00:00-05:00');
-const fields = {
-  days: document.querySelector('#days'),
-  hours: document.querySelector('#hours'),
-  minutes: document.querySelector('#minutes'),
-  seconds: document.querySelector('#seconds')
-};
+const fields = { days: document.querySelector('#days'), hours: document.querySelector('#hours'), minutes: document.querySelector('#minutes'), seconds: document.querySelector('#seconds') };
 const countdownReady = Object.values(fields).every(Boolean);
-
 function updateCountdown() {
   if (!countdownReady) return;
   const distance = eventDate.getTime() - Date.now();
-  if (distance <= 0) {
-    Object.values(fields).forEach((field) => { field.textContent = '00'; });
-    return;
-  }
-  const day = 86400000;
-  const hour = 3600000;
-  const minute = 60000;
+  if (distance <= 0) { Object.values(fields).forEach((field) => { field.textContent = '00'; }); return; }
+  const day = 86400000, hour = 3600000, minute = 60000;
   fields.days.textContent = String(Math.floor(distance / day)).padStart(2, '0');
   fields.hours.textContent = String(Math.floor((distance % day) / hour)).padStart(2, '0');
   fields.minutes.textContent = String(Math.floor((distance % hour) / minute)).padStart(2, '0');
@@ -55,7 +49,6 @@ function updateCountdown() {
 }
 if (countdownReady) { updateCountdown(); setInterval(updateCountdown, 1000); }
 
-// RSVP
 const RSVP_ENDPOINT = '';
 const rsvpOpen = document.querySelector('#rsvpOpen');
 const rsvpModal = document.querySelector('#rsvpModal');
@@ -68,66 +61,18 @@ const rsvpStatus = document.querySelector('#rsvpStatus');
 const rsvpSubmit = document.querySelector('#rsvpSubmit');
 const companionField = document.querySelector('#companionField');
 const companionName = document.querySelector('#companionName');
-
-function openRsvp() {
-  if (!rsvpModal) return;
-  rsvpModal.classList.add('is-open');
-  rsvpModal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('rsvp-lock');
-  setTimeout(() => document.querySelector('#rsvpName')?.focus(), 80);
-}
-function closeRsvp() {
-  if (!rsvpModal) return;
-  rsvpModal.classList.remove('is-open');
-  rsvpModal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('rsvp-lock');
-}
-rsvpOpen?.addEventListener('click', openRsvp);
-rsvpClose?.addEventListener('click', closeRsvp);
-rsvpDone?.addEventListener('click', closeRsvp);
+function openRsvp() { if (!rsvpModal) return; rsvpModal.classList.add('is-open'); rsvpModal.setAttribute('aria-hidden','false'); document.body.classList.add('rsvp-lock'); setTimeout(() => document.querySelector('#rsvpName')?.focus(),80); }
+function closeRsvp() { if (!rsvpModal) return; rsvpModal.classList.remove('is-open'); rsvpModal.setAttribute('aria-hidden','true'); document.body.classList.remove('rsvp-lock'); }
+rsvpOpen?.addEventListener('click', openRsvp); rsvpClose?.addEventListener('click', closeRsvp); rsvpDone?.addEventListener('click', closeRsvp);
 rsvpModal?.addEventListener('click', (event) => { if (event.target === rsvpModal) closeRsvp(); });
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && rsvpModal?.classList.contains('is-open')) closeRsvp(); });
-
-document.querySelectorAll('input[name="acompanante"]').forEach((radio) => {
-  radio.addEventListener('change', () => {
-    const show = radio.checked && radio.value === 'Sí';
-    companionField?.classList.toggle('is-visible', show);
-    if (companionName) companionName.required = show;
-    if (!show && companionName) companionName.value = '';
-  });
-});
-
+document.querySelectorAll('input[name="acompanante"]').forEach((radio) => { radio.addEventListener('change', () => { const show = radio.checked && radio.value === 'Sí'; companionField?.classList.toggle('is-visible',show); if (companionName) companionName.required = show; if (!show && companionName) companionName.value=''; }); });
 rsvpForm?.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  if (!rsvpForm.reportValidity()) return;
+  event.preventDefault(); if (!rsvpForm.reportValidity()) return;
   const data = new FormData(rsvpForm);
-  const payload = {
-    nombre: String(data.get('nombre') || '').trim(),
-    asistencia: String(data.get('asistencia') || ''),
-    acompanante: String(data.get('acompanante') || 'No'),
-    nombreAcompanante: String(data.get('nombreAcompanante') || '').trim(),
-    mensaje: String(data.get('mensaje') || '').trim(),
-    evento: 'Cumpleaños de Melissa · 29/08/2026 20:00',
-    invitadoUrl: window.location.href,
-    userAgent: navigator.userAgent
-  };
-  if (rsvpSubmit) rsvpSubmit.disabled = true;
-  if (rsvpStatus) rsvpStatus.textContent = 'Enviando tu respuesta...';
-  try {
-    if (RSVP_ENDPOINT) {
-      await fetch(RSVP_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
-    } else {
-      await new Promise((resolve) => setTimeout(resolve, 650));
-      localStorage.setItem('rsvp-demo', JSON.stringify({ ...payload, fecha: new Date().toISOString() }));
-    }
-    rsvpFormView?.setAttribute('hidden', '');
-    rsvpSuccess?.classList.add('is-visible');
-    rsvpOpen?.classList.add('rsvp-confirmed');
-    if (rsvpOpen) rsvpOpen.textContent = 'ASISTENCIA REGISTRADA ✓';
-  } catch (error) {
-    console.error('Error enviando RSVP:', error);
-    if (rsvpStatus) rsvpStatus.textContent = 'No pudimos enviar tu respuesta. Intenta nuevamente.';
-  } finally {
-    if (rsvpSubmit) rsvpSubmit.disabled = false;
-  }
+  const payload = { nombre:String(data.get('nombre')||'').trim(), asistencia:String(data.get('asistencia')||''), acompanante:String(data.get('acompanante')||'No'), nombreAcompanante:String(data.get('nombreAcompanante')||'').trim(), mensaje:String(data.get('mensaje')||'').trim(), evento:'Cumpleaños de Melissa · 29/08/2026 20:00', invitadoUrl:window.location.href, userAgent:navigator.userAgent };
+  if (rsvpSubmit) rsvpSubmit.disabled=true; if (rsvpStatus) rsvpStatus.textContent='Enviando tu respuesta...';
+  try { if (RSVP_ENDPOINT) { await fetch(RSVP_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}); } else { await new Promise((resolve)=>setTimeout(resolve,650)); localStorage.setItem('rsvp-demo',JSON.stringify({...payload,fecha:new Date().toISOString()})); } rsvpFormView?.setAttribute('hidden',''); rsvpSuccess?.classList.add('is-visible'); rsvpOpen?.classList.add('rsvp-confirmed'); if (rsvpOpen) rsvpOpen.textContent='ASISTENCIA REGISTRADA ✓'; }
+  catch(error) { console.error('Error enviando RSVP:',error); if(rsvpStatus) rsvpStatus.textContent='No pudimos enviar tu respuesta. Intenta nuevamente.'; }
+  finally { if(rsvpSubmit) rsvpSubmit.disabled=false; }
 });
