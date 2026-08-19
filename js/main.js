@@ -49,7 +49,7 @@ function updateCountdown() {
 }
 if (countdownReady) { updateCountdown(); setInterval(updateCountdown, 1000); }
 
-const RSVP_ENDPOINT = '';
+const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyvRLBfT6bz4m46lJxcmUQA88gg8rYJ6h0fsgIPVstYpXyRI5DFBqT4Z4n1OLVf6fA/exec';
 const rsvpOpen = document.querySelector('#rsvpOpen');
 const rsvpModal = document.querySelector('#rsvpModal');
 const rsvpClose = document.querySelector('#rsvpClose');
@@ -72,7 +72,13 @@ rsvpForm?.addEventListener('submit', async (event) => {
   const data = new FormData(rsvpForm);
   const payload = { nombre:String(data.get('nombre')||'').trim(), asistencia:String(data.get('asistencia')||''), acompanante:String(data.get('acompanante')||'No'), nombreAcompanante:String(data.get('nombreAcompanante')||'').trim(), mensaje:String(data.get('mensaje')||'').trim(), evento:'Cumpleaños de Melissa · 29/08/2026 20:00', invitadoUrl:window.location.href, userAgent:navigator.userAgent };
   if (rsvpSubmit) rsvpSubmit.disabled=true; if (rsvpStatus) rsvpStatus.textContent='Enviando tu respuesta...';
-  try { if (RSVP_ENDPOINT) { await fetch(RSVP_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}); } else { await new Promise((resolve)=>setTimeout(resolve,650)); localStorage.setItem('rsvp-demo',JSON.stringify({...payload,fecha:new Date().toISOString()})); } rsvpFormView?.setAttribute('hidden',''); rsvpSuccess?.classList.add('is-visible'); rsvpOpen?.classList.add('rsvp-confirmed'); if (rsvpOpen) rsvpOpen.textContent='ASISTENCIA REGISTRADA ✓'; }
+  try {
+    await fetch(RSVP_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    rsvpFormView?.setAttribute('hidden','');
+    rsvpSuccess?.classList.add('is-visible');
+    rsvpOpen?.classList.add('rsvp-confirmed');
+    if (rsvpOpen) rsvpOpen.textContent='ASISTENCIA REGISTRADA ✓';
+  }
   catch(error) { console.error('Error enviando RSVP:',error); if(rsvpStatus) rsvpStatus.textContent='No pudimos enviar tu respuesta. Intenta nuevamente.'; }
   finally { if(rsvpSubmit) rsvpSubmit.disabled=false; }
 });
