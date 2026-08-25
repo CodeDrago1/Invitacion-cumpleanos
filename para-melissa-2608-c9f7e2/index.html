@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#dff4ff" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Para Melissa 💙</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1.0" />
+</head>
+<body>
+  <div id="lockScreen" class="lock-screen">
+    <div class="lock-cloud cloud-a"></div><div class="lock-cloud cloud-b"></div>
+    <div class="lock-card">
+      <div class="mini-mascot" aria-hidden="true"><span class="ear left"></span><span class="ear right"></span><span class="face"><i class="eye e1"></i><i class="eye e2"></i><i class="mouth"></i><i class="cheek c1"></i><i class="cheek c2"></i></span></div>
+      <p class="tiny">UN MENSAJE SOLO PARA TI</p>
+      <h1>Hola, Melissa ♡</h1>
+      <p>Hay algo esperando detrás de estas nubes.</p>
+      <label for="secret">Escribe la clave</label>
+      <input id="secret" type="password" inputmode="text" autocomplete="off" placeholder="••••••••" />
+      <button id="unlock" type="button">ABRIR MI CARTA ✨</button>
+      <p id="lockMessage" class="lock-message" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <main id="card" class="card-site hidden" aria-hidden="true">
+    <section class="hero">
+      <div class="sky-stars" aria-hidden="true"></div>
+      <div class="cloud cloud-1"></div><div class="cloud cloud-2"></div><div class="cloud cloud-3"></div>
+      <div class="hero-inner">
+        <p class="overline">26 · 08 · 2026</p>
+        <div class="cinnamoroll" aria-hidden="true">
+          <span class="big-ear left"></span><span class="big-ear right"></span>
+          <span class="head"><i class="eye left-eye"></i><i class="eye right-eye"></i><i class="smile"></i><i class="blush left-blush"></i><i class="blush right-blush"></i></span>
+          <span class="body"></span><span class="tail"></span>
+        </div>
+        <h1>Feliz cumpleaños,<br><em>mi Melissa</em> ♡</h1>
+        <p class="hero-copy">Hoy no quería mandarte solo un “feliz cumpleaños”. Quería dejarte un rinconcito bonito que fuera solamente tuyo.</p>
+        <button id="openLetter" class="soft-button" type="button">ABRIR MI CARTA 💌</button>
+      </div>
+    </section>
+
+    <section id="letter" class="letter-section">
+      <div class="paper-heart h1">♡</div><div class="paper-heart h2">♡</div>
+      <article class="letter-card reveal">
+        <p class="letter-date">26 de agosto</p>
+        <h2>Para la cumpleañera más bonita</h2>
+        <div class="letter-text">
+          <p>Mi amor, hoy celebro mucho más que tu cumpleaños. Celebro que existas, que seas tú, con tu forma de ser, tus ocurrencias, tu manera de sonreír y todos esos pequeños detalles que hacen que mis días contigo se sientan distintos.</p>
+          <p>Espero que este nuevo año te traiga muchísimas cosas bonitas, tranquilidad, sueños cumplidos y momentos que te hagan sentir orgullosa y feliz. Y, si me dejas, quiero seguir estando a tu lado para compartir muchos de esos momentos contigo.</p>
+          <p>Gracias por ser mi compañera, por dejarme conocerte cada día un poquito más y por todos los recuerdos que seguimos construyendo. Quiero que hoy te sientas muy querida, porque lo eres. Muchísimo.</p>
+          <p>Tu cumpleaños es hoy, pero no pienso limitar la celebración a un solo día. El 28 seguimos festejando como se debe. 💙</p>
+        </div>
+        <div class="signature-block"><span>Con muchísimo cariño,</span><strong>tu novio ♡</strong></div>
+      </article>
+    </section>
+
+    <section class="wish-section">
+      <div class="wish-card reveal">
+        <p class="overline dark">UN DESEO PARA TI</p>
+        <h2>Pide uno. No se lo cuentes a nadie.</h2>
+        <p>Dicen que si lo haces entre nubes y estrellas, tiene un poquito más de posibilidades de cumplirse.</p>
+        <button id="makeWish" class="wish-button" type="button">PEDIR MI DESEO ✦</button>
+        <div id="wishResult" class="wish-result" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-clouds"></div>
+      <p>Te quiero, Melissa.</p>
+      <span>Happy birthday, my love ♡</span>
+    </footer>
+  </main>
+  <script src="script.js?v=1.0"></script>
+</body>
+</html>
