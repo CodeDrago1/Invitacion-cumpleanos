@@ -1,4 +1,4 @@
-const ACCESS_KEY = 'Cielo2608';
+const ACCESS_KEY = 'MiamorcitaMeli';
 const lock = document.querySelector('#lockScreen');
 const card = document.querySelector('#card');
 const secret = document.querySelector('#secret');
